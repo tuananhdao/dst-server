@@ -1,6 +1,6 @@
 # Don't Starve Together Docker Server
 
-This repo deploys a Don't Starve Together dedicated server using `jamesits/dst-server:nightly` and Docker Compose.
+This repo deploys a Don't Starve Together dedicated server using a locally built Docker image based on `jamesits/dst-server:nightly`. The build refreshes the DST dedicated server through SteamCMD so it matches current clients.
 
 The server runs two shards:
 
@@ -11,6 +11,7 @@ Steam networking uses UDP `12346` and `12347`. The container runs with host netw
 
 ## Files
 
+- `Dockerfile` builds a fresh DST server image with `app_update 343050 validate`.
 - `docker-compose.yml` starts the DST container with host networking and persists server data in `./data/DoNotStarveTogether`.
 - `scripts/entrypoint-no-steam-update.sh` skips the image's forced SteamCMD update step, which can fail with `App '343050' state is 0x6`, while still updating server mods and starting DST.
 - `data/DoNotStarveTogether/Cluster_1` contains the checked-in cluster configuration.
@@ -67,7 +68,7 @@ Every change should follow this order:
 git add .
 git commit -m "Describe the change"
 git push origin main
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo docker compose pull && sudo docker compose up -d'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo docker compose build --pull && sudo docker compose up -d --force-recreate'
 ```
 
 This keeps GitHub, the local checkout, and the running server aligned.
