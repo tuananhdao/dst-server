@@ -1,0 +1,7 @@
+.env
+data/DoNotStarveTogether/Cluster_1/cluster_token.txt
+data/DoNotStarveTogether/Cluster_1/save/
+data/DoNotStarveTogether/Cluster_1/Master/save/
+data/DoNotStarveTogether/Cluster_1/Caves/save/
+*.log
+

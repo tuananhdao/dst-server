@@ -1,0 +1,13 @@
+services:
+  dst-server:
+    image: jamesits/dst-server:latest
+    container_name: dst-server
+    restart: on-failure:5
+    environment:
+      DST_SERVER_ARCH: amd64
+    ports:
+      - "10999-11000:10999-11000/udp"
+      - "12346-12347:12346-12347/udp"
+    volumes:
+      - ./data/DoNotStarveTogether:/data
+    stop_grace_period: 6m
