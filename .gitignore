@@ -2,6 +2,9 @@
 data/DoNotStarveTogether/Cluster_1/save/
 data/DoNotStarveTogether/Cluster_1/Master/save/
 data/DoNotStarveTogether/Cluster_1/Caves/save/
+data/DoNotStarveTogether/Cluster_1/Master/backup/
+data/DoNotStarveTogether/Cluster_1/**/server_log.txt
+data/DoNotStarveTogether/Cluster_1/**/server_chat_log.txt
 data/Agreements/
 data/DoNotStarveTogether/Agreements/
 data/DoNotStarveTogether/DoNotStarveTogether/
