@@ -12,6 +12,7 @@ Steam networking uses UDP `12346` and `12347`. The container runs with host netw
 ## Files
 
 - `docker-compose.yml` starts the DST container with host networking and persists server data in `./data/DoNotStarveTogether`.
+- `scripts/entrypoint-no-steam-update.sh` skips the image's forced SteamCMD update step, which can fail with `App '343050' state is 0x6`, while still updating server mods and starting DST.
 - `data/DoNotStarveTogether/Cluster_1` contains the checked-in cluster configuration.
 - `scripts/deploy.sh` installs Docker on a blank Ubuntu server if needed, pulls the latest git changes, and restarts the container.
 - `.env.example` shows the local environment variable used for a Klei cluster token.

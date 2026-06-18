@@ -4,8 +4,10 @@ services:
     container_name: dst-server
     restart: on-failure:5
     network_mode: host
+    entrypoint: /usr/local/bin/entrypoint-no-steam-update.sh
     environment:
       DST_SERVER_ARCH: amd64
     volumes:
       - ./data:/data
+      - ./scripts/entrypoint-no-steam-update.sh:/usr/local/bin/entrypoint-no-steam-update.sh:ro
     stop_grace_period: 6m
