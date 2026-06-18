@@ -7,6 +7,16 @@ The server runs two shards:
 - Master on UDP `10999`
 - Caves on UDP `11000`
 
+Server name:
+
+- `meomeomeo`
+
+Direct connect from the DST console:
+
+```lua
+c_connect("193.10.159.205", 10999)
+```
+
 Steam networking uses UDP `12346` and `12347`. The container runs with host networking so DST can also use its dynamic UDP ports directly. The Global Positions server mod is enabled with Steam Workshop ID `378160973`.
 
 ## Files
@@ -24,15 +34,12 @@ From this folder:
 
 ```sh
 chmod +x scripts/deploy.sh
-git add .
-git commit -m "Set up DST Docker server"
-git push origin main
 ./scripts/deploy.sh
 ```
 
 The default deployment target is `ubuntu@193.10.159.205` and the server path is `/opt/dst-server`.
 
-## Add the Klei Cluster Token
+## Klei Cluster Token
 
 Generate a token in the Don't Starve Together client:
 
@@ -42,18 +49,16 @@ Generate a token in the Don't Starve Together client:
 4. Open Don't Starve Together Servers.
 5. Add a new server and copy the generated token.
 
-Then write it on the server:
+This repo currently includes `data/DoNotStarveTogether/Cluster_1/cluster_token.txt`, because this deployment intentionally commits the token. If you rotate the token, update that file locally, commit, push, then deploy:
 
 ```sh
-ssh ubuntu@193.10.159.205
-cd /opt/dst-server
-printf '%s\n' 'PASTE_TOKEN_HERE' > data/DoNotStarveTogether/Cluster_1/cluster_token.txt
-sudo docker compose restart
+git add data/DoNotStarveTogether/Cluster_1/cluster_token.txt
+git commit -m "Update DST cluster token"
+git push origin main
+./scripts/deploy.sh
 ```
 
-Do not commit a real cluster token.
-
-You can also provide the token during deploy:
+You can also provide a token during deploy without editing the committed file:
 
 ```sh
 DST_CLUSTER_TOKEN='PASTE_TOKEN_HERE' ./scripts/deploy.sh
@@ -72,6 +77,8 @@ ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo dock
 ```
 
 This keeps GitHub, the local checkout, and the running server aligned.
+
+For the common case, `./scripts/deploy.sh` performs the remote pull, DST binary update, and container recreate.
 
 ## Operations
 
