@@ -8,4 +8,7 @@ data/DoNotStarveTogether/Cluster_1/**/server_chat_log.txt
 data/Agreements/
 data/DoNotStarveTogether/Agreements/
 data/DoNotStarveTogether/DoNotStarveTogether/
+server-bin/
+server-bin.new/
+server-bin.prev/
 *.log

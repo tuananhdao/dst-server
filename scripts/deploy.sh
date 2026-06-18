@@ -27,5 +27,5 @@ ssh "$SERVER" "cd '$APP_DIR' && mkdir -p data/DoNotStarveTogether/Cluster_1"
 if [ -n "${DST_CLUSTER_TOKEN:-}" ]; then
   printf '%s\n' "$DST_CLUSTER_TOKEN" | ssh "$SERVER" "cat > '$APP_DIR/data/DoNotStarveTogether/Cluster_1/cluster_token.txt'"
 fi
-ssh "$SERVER" "cd '$APP_DIR' && sudo docker compose build --pull && sudo docker compose up -d --force-recreate"
+ssh "$SERVER" "cd '$APP_DIR' && sudo docker pull jamesits/dst-server:nightly && sudo ./scripts/update-dst-server.sh && sudo docker compose up -d --force-recreate"
 ssh "$SERVER" "cd '$APP_DIR' && sudo docker compose ps"

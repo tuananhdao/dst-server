@@ -1,7 +1,6 @@
 services:
   dst-server:
-    build: .
-    image: dst-server:local
+    image: jamesits/dst-server:nightly
     container_name: dst-server
     restart: on-failure:5
     network_mode: host
@@ -11,5 +10,6 @@ services:
       DST_SERVER_ARCH: amd64
     volumes:
       - ./data:/data
+      - ./server-bin:/opt/dst_server
       - ./scripts/entrypoint-no-steam-update.sh:/usr/local/bin/entrypoint-no-steam-update.sh:ro
     stop_grace_period: 6m
