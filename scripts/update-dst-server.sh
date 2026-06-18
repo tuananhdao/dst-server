@@ -9,6 +9,7 @@ rm -rf server-bin.new
 mkdir -p server-bin.new
 
 docker run --rm \
+  --network host \
   -v "$APP_DIR/server-bin.new:/opt/dst_server_fresh" \
   --entrypoint sh \
   "$BASE_IMAGE" \
@@ -22,4 +23,3 @@ mv server-bin.new server-bin
 
 printf 'Installed DST dedicated server version: '
 cat server-bin/version.txt
-
