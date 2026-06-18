@@ -5,6 +5,7 @@ services:
     restart: on-failure:5
     network_mode: host
     entrypoint: /usr/local/bin/entrypoint-no-steam-update.sh
+    command: ["supervisord", "-c", "/etc/supervisor/supervisor.conf", "-n"]
     environment:
       DST_SERVER_ARCH: amd64
     volumes:

@@ -11,6 +11,10 @@ on_error() {
 }
 trap 'on_error ${LINENO} $?' ERR 2>/dev/null || true
 
+if [ "$#" -eq 0 ]; then
+    set -- supervisord -c /etc/supervisor/supervisor.conf -n
+fi
+
 if [ "$1" = "dontstarve_dedicated_server_nullrenderer" ] || [ "$1" = "supervisord" ]; then
     if [ ! -d "${DST_USER_DATA_PATH}/DoNotStarveTogether" ]; then
         echo "Creating default server config..."
