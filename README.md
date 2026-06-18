@@ -7,11 +7,11 @@ The server runs two shards:
 - Master on UDP `10999`
 - Caves on UDP `11000`
 
-Steam networking uses UDP `12346` and `12347`. The Global Positions server mod is enabled with Steam Workshop ID `378160973`.
+Steam networking uses UDP `12346` and `12347`. The container runs with host networking so DST can also use its dynamic UDP ports directly. The Global Positions server mod is enabled with Steam Workshop ID `378160973`.
 
 ## Files
 
-- `docker-compose.yml` starts the DST container and persists server data in `./data/DoNotStarveTogether`.
+- `docker-compose.yml` starts the DST container with host networking and persists server data in `./data/DoNotStarveTogether`.
 - `data/DoNotStarveTogether/Cluster_1` contains the checked-in cluster configuration.
 - `scripts/deploy.sh` installs Docker on a blank Ubuntu server if needed, pulls the latest git changes, and restarts the container.
 - `.env.example` shows the local environment variable used for a Klei cluster token.
