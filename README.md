@@ -46,7 +46,7 @@ Then write it on the server:
 ssh ubuntu@193.10.159.205
 cd /opt/dst-server
 printf '%s\n' 'PASTE_TOKEN_HERE' > data/DoNotStarveTogether/Cluster_1/cluster_token.txt
-docker compose restart
+sudo docker compose restart
 ```
 
 Do not commit a real cluster token.
@@ -66,7 +66,7 @@ Every change should follow this order:
 git add .
 git commit -m "Describe the change"
 git push origin main
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && docker compose pull && docker compose up -d'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo docker compose pull && sudo docker compose up -d'
 ```
 
 This keeps GitHub, the local checkout, and the running server aligned.
@@ -76,25 +76,25 @@ This keeps GitHub, the local checkout, and the running server aligned.
 Check status:
 
 ```sh
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && docker compose ps'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && sudo docker compose ps'
 ```
 
 Watch logs:
 
 ```sh
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && docker compose logs -f --tail=200'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && sudo docker compose logs -f --tail=200'
 ```
 
 Restart cleanly:
 
 ```sh
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && docker compose restart'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && sudo docker compose restart'
 ```
 
 Stop the server:
 
 ```sh
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && docker compose stop'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && sudo docker compose stop'
 ```
 
 The compose file uses a six-minute stop grace period so DST has time to save worlds before the container exits.
