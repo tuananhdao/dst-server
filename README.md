@@ -1,6 +1,6 @@
 # Don't Starve Together Docker Server
 
-This repo deploys a Don't Starve Together dedicated server using `jamesits/dst-server:latest` and Docker Compose.
+This repo deploys a Don't Starve Together dedicated server using `jamesits/dst-server:nightly` and Docker Compose.
 
 The server runs two shards:
 

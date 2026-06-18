@@ -1,6 +1,6 @@
 services:
   dst-server:
-    image: jamesits/dst-server:latest
+    image: jamesits/dst-server:nightly
     container_name: dst-server
     restart: on-failure:5
     network_mode: host
