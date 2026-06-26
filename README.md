@@ -17,7 +17,14 @@ Direct connect from the DST console:
 c_connect("193.10.159.205", 10999)
 ```
 
-Steam networking uses UDP `12346` and `12347`. The container runs with host networking so DST can also use its dynamic UDP ports directly. The Global Positions server mod is enabled with Steam Workshop ID `378160973`.
+Steam networking uses UDP `12346` and `12347`. The container runs with host networking so DST can also use its dynamic UDP ports directly. The server is configured for 12 players and enables these Steam Workshop mods:
+
+- Global Positions (`378160973`)
+- Finder (`780009141`)
+- Wormhole Marks [DST] (`362175979`)
+- Simple Health Bar DST (`1207269058`)
+- Display Food Values (`347079953`)
+- Display Attack Range (`2078243581`)
 
 ## Files
 
@@ -26,6 +33,7 @@ Steam networking uses UDP `12346` and `12347`. The container runs with host netw
 - `scripts/entrypoint-no-steam-update.sh` skips the image's forced SteamCMD update step, which can fail with `App '343050' state is 0x6`, while still updating server mods and starting DST.
 - `data/DoNotStarveTogether/Cluster_1` contains the checked-in cluster configuration.
 - `scripts/deploy.sh` installs Docker on a blank Ubuntu server if needed, pulls the latest git changes, and restarts the container.
+- `scripts/install-workshop-mods.sh` downloads configured Workshop mods with SteamCMD and links them into the active DST mods directory.
 - `.env.example` shows the local environment variable used for a Klei cluster token.
 
 ## First deploy
@@ -73,7 +81,7 @@ Every change should follow this order:
 git add .
 git commit -m "Describe the change"
 git push origin main
-ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo docker pull jamesits/dst-server:nightly && sudo ./scripts/update-dst-server.sh && sudo docker compose up -d --force-recreate'
+ssh ubuntu@193.10.159.205 'cd /opt/dst-server && git pull --ff-only && sudo docker pull jamesits/dst-server:nightly && sudo ./scripts/update-dst-server.sh && sudo ./scripts/install-workshop-mods.sh && sudo docker compose up -d --force-recreate'
 ```
 
 This keeps GitHub, the local checkout, and the running server aligned.

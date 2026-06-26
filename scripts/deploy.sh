@@ -5,7 +5,7 @@ SERVER="${SERVER:-ubuntu@193.10.159.205}"
 REPO_URL="${REPO_URL:-https://github.com/tuananhdao/dst-server.git}"
 APP_DIR="${APP_DIR:-/opt/dst-server}"
 
-ssh "$SERVER" "sudo apt-get update && sudo apt-get install -y ca-certificates curl git"
+ssh "$SERVER" "sudo apt-get update && sudo apt-get install -y ca-certificates curl git unzip"
 
 ssh "$SERVER" '
 set -euo pipefail
@@ -27,5 +27,5 @@ ssh "$SERVER" "cd '$APP_DIR' && mkdir -p data/DoNotStarveTogether/Cluster_1"
 if [ -n "${DST_CLUSTER_TOKEN:-}" ]; then
   printf '%s\n' "$DST_CLUSTER_TOKEN" | ssh "$SERVER" "cat > '$APP_DIR/data/DoNotStarveTogether/Cluster_1/cluster_token.txt'"
 fi
-ssh "$SERVER" "cd '$APP_DIR' && sudo docker pull jamesits/dst-server:nightly && sudo ./scripts/update-dst-server.sh && sudo docker compose up -d --force-recreate"
+ssh "$SERVER" "cd '$APP_DIR' && sudo docker pull jamesits/dst-server:nightly && sudo ./scripts/update-dst-server.sh && sudo ./scripts/install-workshop-mods.sh && sudo docker compose up -d --force-recreate"
 ssh "$SERVER" "cd '$APP_DIR' && sudo docker compose ps"
