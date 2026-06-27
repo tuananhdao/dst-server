@@ -5,6 +5,7 @@ return {
     berrybush = "often",
     basicresource_regrowth = "always",
     grass = "often",
+    portalresurection = "always",
     regrowth = "fast",
     sapling = "often",
     world_size = "huge",
